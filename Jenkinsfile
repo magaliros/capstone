@@ -14,12 +14,7 @@ pipeline {
             steps {
                 sh 'tidy -q -e public/*.html'
             }
-         }
-        stage('Security Scan') {
-            steps { 
-                aquaMicroscanner imageName: 'alpine:latest', notCompleted: 'exit 1', onDisallowed: 'fail'
-            }
-        }         
+         }        
         stage('production') {
             steps {
                 withAWS(region:'us-east-2',credentials:'aws-static') {
